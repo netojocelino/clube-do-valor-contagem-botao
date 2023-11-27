@@ -9,3 +9,32 @@
  * License:     GPL v2 or later
  */
 
+function bcc_init_db ()
+{
+    if (get_option('bcc_db_created')) return;
+
+    global $wpdb;
+    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
+    $charset_collate = $wpdb->get_charset_collate();
+    $table_name = $wpdb->prefix . 'cbs_buttons_clicks_counts';
+
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        name varchar(512) NOT NULL,
+        metadata text NULL,
+        created_at datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+
+        PRIMARY KEY  (id)
+        ) $charset_collate;";
+    dbDelta( $sql );
+
+    update_option('bcc_db_created', true);
+}
+
+function bcc_uninstall ()
+{
+    update_option('bcc_db_created', false);
+}
+register_activation_hook(__FILE__, 'bcc_init_db');
+register_deactivation_hook(__FILE__, 'bcc_uninstall');
