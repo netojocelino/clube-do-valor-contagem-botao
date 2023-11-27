@@ -77,7 +77,7 @@ function bcc_insert_row ()
     );
 }
 
-function add_button_click_count ()
+function add_button_click_count (array $attributes)
 {
     require BCC_ROOTDIR . '/views/button-html.php';
 

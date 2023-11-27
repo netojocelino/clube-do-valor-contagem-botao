@@ -8,9 +8,9 @@
         type="button"
         class="btn-bcc"
         name="bcc-click"
-        data-click="primeira-versao"
+        data-click="<?php echo data_get($attributes, 'id', 'sem-categoria'); ?>"
         data-admin="<?php echo admin_url('admin-ajax.php'); ?>"
     >
-        Clique Aqui e capte
+        <?php echo data_get($attributes, 'name', "Clique Aqui e capte"); ?>
     </button>
 </p>
