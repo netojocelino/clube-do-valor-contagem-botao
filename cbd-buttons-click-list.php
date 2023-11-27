@@ -39,6 +39,78 @@ function bcc_list_init_db ()
     }
 }
 
+function bcc_get_grouped_rows ()
+{
+    global $wpdb;
+    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
+    $charset_collate = $wpdb->get_charset_collate();
+    $table_name = $wpdb->prefix . 'cbs_buttons_clicks_counts';
+
+    $sql = "SELECT *, count(*) AS total
+        FROM {$table_name}
+        GROUP BY name
+        ORDER BY total DESC";
+
+    return $wpdb->get_results($sql);
+}
+
+
+function bcc_find_rows_by_name (string $name)
+{
+    $name = preg_replace('[^A-Za-z0-9]', '-', $name);
+
+    global $wpdb;
+    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
+    $charset_collate = $wpdb->get_charset_collate();
+    $table_name = $wpdb->prefix . 'cbs_buttons_clicks_counts';
+
+    $sql = "SELECT base_table.*, (
+            SELECT COUNT(*) FROM {$table_name} WHERE name = '{$name}' and id <= base_table.id
+        ) AS position
+        FROM {$table_name} AS base_table
+        WHERE name = '{$name}' ORDER BY created_at DESC";
+
+    return $wpdb->get_results($sql);
+}
+
+function list_clicks_menu ()
+{
+
+    function list_clicks_list_index ()
+    {
+        require_once(BCC_ROOTDIR . 'views/list.php');
+    }
+
+    function list_clicks_list_view ()
+    {
+        require_once(BCC_ROOTDIR . 'views/details.php');
+    }
+
+    add_menu_page('Contabilizador de Links',
+        'Contador de Cliques',
+        'manage_options',
+        'list_clicks_list_index',
+        'list_clicks_list_index',
+    );
+
+    add_submenu_page('list_clicks_list_index',
+        'Detalhes',
+        null,
+        'manage_options', //capability
+        'list_clicks_list_view', //menu slug
+        'list_clicks_list_view' //function
+    );
+
+    function hidden_submenus () {
+        remove_submenu_page( 'list_clicks_list_index', 'list_clicks_list_view' );
+    }
+
+    add_filter('submenu_file', 'hidden_submenus');
+
+}
+
 if (defined('WP_CLI') && WP_CLI):
 function cbb_wp_list_all()
 {
@@ -73,3 +145,4 @@ WP_CLI::add_command('buttons-click list-all', 'cbb_wp_list_all');
 endif;
 
 register_activation_hook(__FILE__, 'cbd_init_plugin');
+add_action('admin_menu','list_clicks_menu');
