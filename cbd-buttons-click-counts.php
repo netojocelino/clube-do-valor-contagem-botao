@@ -12,6 +12,28 @@
 
 define('BCC_ROOTDIR', plugin_dir_path(__FILE__));
 
+if (!function_exists('data_get')) :
+function data_get(array $array, string $attribute, string $default = null)
+{
+
+    if (empty($array))
+    {
+        return $default;
+    }
+
+    $result = $array;
+
+    foreach (explode('.', $attribute) as $key) {
+        if (!array_key_exists($key, $result)) {
+            return $default;
+        }
+        $result = $result[$key];
+    }
+
+    return $result;
+}
+endif;
+
 function bcc_init_db ()
 {
     if (get_option('bcc_db_created')) return;
@@ -44,7 +66,7 @@ function bcc_insert_row ()
 {
     $data = $_POST ?? [];
     global $wpdb;
-    $name = preg_replace('[^A-Za-z0-9]', '_', $data['name'] ?? 'sem categoria');
+    $name = preg_replace('[^A-Za-z0-9]', '-', data_get($data, 'name', 'sem categoria'));
 
     $wpdb->insert(
         $wpdb->prefix . 'cbs_buttons_clicks_counts',
