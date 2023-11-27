@@ -40,6 +40,21 @@ function bcc_uninstall ()
     update_option('bcc_db_created', false);
 }
 
+function bcc_insert_row ()
+{
+    $data = $_POST ?? [];
+    global $wpdb;
+    $name = preg_replace('[^A-Za-z0-9]', '_', $data['name'] ?? 'sem categoria');
+
+    $wpdb->insert(
+        $wpdb->prefix . 'cbs_buttons_clicks_counts',
+        array(
+            'name'     => $name,
+            'metadata' => json_encode([]),
+        )
+    );
+}
+
 function add_button_click_count ()
 {
     require BCC_ROOTDIR . '/views/button-html.php';
@@ -51,3 +66,6 @@ register_activation_hook(__FILE__, 'bcc_init_db');
 register_deactivation_hook(__FILE__, 'bcc_uninstall');
 
 add_shortcode('count_button', 'add_button_click_count');
+
+add_action('wp_ajax_bcc_insert_row', 'bcc_insert_row');
+add_action('wp_ajax_nopriv_bcc_insert_row', 'bcc_insert_row');
