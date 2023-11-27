@@ -42,7 +42,7 @@ function bcc_uninstall ()
 
 function add_button_click_count ()
 {
-    include BCC_ROOTDIR . '/views/button-html.php';
+    require BCC_ROOTDIR . '/views/button-html.php';
 
     return ob_get_clean();
 }
