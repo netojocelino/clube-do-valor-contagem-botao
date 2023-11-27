@@ -9,6 +9,9 @@
  * License:     GPL v2 or later
  */
 
+
+define('BCC_ROOTDIR', plugin_dir_path(__FILE__));
+
 function bcc_init_db ()
 {
     if (get_option('bcc_db_created')) return;
@@ -36,5 +39,15 @@ function bcc_uninstall ()
 {
     update_option('bcc_db_created', false);
 }
+
+function add_button_click_count ()
+{
+    include BCC_ROOTDIR . '/views/button-html.php';
+
+    return ob_get_clean();
+}
+
 register_activation_hook(__FILE__, 'bcc_init_db');
 register_deactivation_hook(__FILE__, 'bcc_uninstall');
+
+add_shortcode('count_button', 'add_button_click_count');

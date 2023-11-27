@@ -1,0 +1,18 @@
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+if(typeof hook_manager_clicks === 'undefined')
+{
+    function hook_manager_clicks ()
+    {
+        const data = this.dataset
+        console.log(data)
+    }
+}
+
+document.querySelectorAll('[name="bcc-click"]')
+    .forEach(btn => {
+        btn.addEventListener('click', hook_manager_clicks)
+    })
+})
+</script>
