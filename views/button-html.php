@@ -10,6 +10,7 @@
         name="bcc-click"
         data-click="<?php echo data_get($attributes, 'id', 'sem-categoria'); ?>"
         data-admin="<?php echo admin_url('admin-ajax.php'); ?>"
+        data-url="<?php echo data_get($attributes, 'link', ''); ?>"
     >
         <?php echo data_get($attributes, 'name', "Clique Aqui e capte"); ?>
     </button>

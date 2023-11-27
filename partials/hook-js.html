@@ -18,6 +18,8 @@ if(typeof hook_manager_clicks === 'undefined')
             },
             body,
         })
+
+        if (data.url) window.open(data.url, '_blank')
     }
 }
 
