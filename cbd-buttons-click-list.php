@@ -38,4 +38,38 @@ function bcc_list_init_db ()
         throw new \Exception('Tabela de Contagem é necessária, instale o plugin `Buttons Click Counts`');
     }
 }
+
+if (defined('WP_CLI') && WP_CLI):
+function cbb_wp_list_all()
+{
+    global $wpdb;
+    $table = $wpdb->prefix . 'cbs_buttons_clicks_counts';
+    $rows = $wpdb->get_results(
+        "SELECT id as click_number, created_at, name FROM $table ORDER BY id DESC LIMIT 15"
+    );
+
+    WP_CLI::line(sprintf(
+        "%7s | %-22s | %-10s",
+        'Cliques',
+        'Data e Hora',
+        'Categoria'
+    ));
+
+    foreach ($rows as $row) {
+        $date = date_create($row->created_at);
+        $date = date_format($date, 'd\/m\/Y \à\s H:i:s');
+
+        WP_CLI::line(
+            sprintf(
+                "%7s | %22s | %10s",
+                $row->click_number,
+                $date,
+                $row->name
+            )
+        );
+    }
+}
+WP_CLI::add_command('buttons-click list-all', 'cbb_wp_list_all');
+endif;
+
 register_activation_hook(__FILE__, 'cbd_init_plugin');
