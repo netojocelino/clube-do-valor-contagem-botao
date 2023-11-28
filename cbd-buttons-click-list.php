@@ -2,6 +2,7 @@
 /**
  * Plugin Name: Buttons Click List
  * Plugin URI:  https://github.com/netojocelino/clube-do-valor-contagem-botao
+ * Text Domain: cbv-buttons-click-list
  * Version:     1.0
  * Description: List the clicks from a button with shortcode (depends on Buttons Click Counts and WP-cli).
  * Author:      Jocelino Neto
@@ -9,7 +10,7 @@
  * License:     GPL v2 or later
  */
 
-function cbd_init_plugin () 
+function cbv_init_plugin () 
 {
     bcc_list_init_db();
 }
@@ -144,5 +145,5 @@ function cbb_wp_list_all()
 WP_CLI::add_command('buttons-click list-all', 'cbb_wp_list_all');
 endif;
 
-register_activation_hook(__FILE__, 'cbd_init_plugin');
+register_activation_hook(__FILE__, 'cbv_init_plugin');
 add_action('admin_menu','list_clicks_menu');
