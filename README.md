@@ -24,7 +24,7 @@ $ git clone https://github.com/netojocelino/clube-do-valor-contagem-botao.git
 Primeiramente é necessário estar na pasta do projeto WordPress para utilizar a linha de comando:
 
 ```bash
-$ wp plugin install <url>
+$ wp plugin install https://github.com/netojocelino/clube-do-valor-contagem-botao/releases/download/v1.0.0/clube-do-valor-contagem-botao.zip
 $ wp plugin activate clube-do-valor-contagem-botao/cdv-buttons-click-counts clube-do-valor-contagem-botao/cdv-buttons-click-list
 ```
 
