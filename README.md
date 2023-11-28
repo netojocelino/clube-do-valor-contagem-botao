@@ -25,7 +25,7 @@ Primeiramente é necessário estar na pasta do projeto WordPress para utilizar a
 
 ```bash
 $ wp plugin install <url>
-$ wp plugin activate clube-do-valor-contagem-botao/cbv-buttons-click-counts clube-do-valor-contagem-botao/cbv-buttons-click-list
+$ wp plugin activate clube-do-valor-contagem-botao/cdv-buttons-click-counts clube-do-valor-contagem-botao/cdv-buttons-click-list
 ```
 
 Após estes passos, podemos pular para a etapa [Como utilizar](#como-utilizar)

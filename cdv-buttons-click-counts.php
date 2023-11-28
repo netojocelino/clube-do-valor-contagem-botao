@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Buttons Click Counts
  * Plugin URI:  https://github.com/netojocelino/clube-do-valor-contagem-botao
- * Text Domain: cbv-buttons-click-counts
+ * Text Domain: cdv-buttons-click-counts
  * Version:     1.0
  * Description: Count the clicks from a button with shortcode.
  * Author:      Jocelino Neto
