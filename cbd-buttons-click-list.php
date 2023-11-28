@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Buttons Click List
- * Plugin URI:  https://github.com/netojocelino/cbs-buttons-clicks-counts
+ * Plugin URI:  https://github.com/netojocelino/clube-do-valor-contagem-botao
  * Version:     1.0
  * Description: List the clicks from a button with shortcode (depends on Buttons Click Counts and WP-cli).
  * Author:      Jocelino Neto
