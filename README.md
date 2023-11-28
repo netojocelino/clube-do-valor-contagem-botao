@@ -1,6 +1,6 @@
 # Clube do Valor - WordPress
 
-[Descrição da tarefa](.github/README.md) | 
+[Descrição da tarefa](.github/DESCRIPTION.md) | 
 
 ## Como instalar
 
