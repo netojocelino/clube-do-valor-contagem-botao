@@ -21,8 +21,14 @@ $ git clone https://github.com/netojocelino/clube-do-valor-contagem-botao.git
 > É necessário ter o [wp-cli instalado](https://wp-cli.org/br/#instalando) para utilizar a linha de comando.
 
 
+Primeiramente é necessário estar na pasta do projeto WordPress para utilizar a linha de comando:
 
-> TODO
+```bash
+$ wp plugin install <url>
+$ wp plugin activate clube-do-valor-contagem-botao/cbv-buttons-click-counts clube-do-valor-contagem-botao/cbv-buttons-click-list
+```
+
+Após estes passos, podemos pular para a etapa [Como utilizar](#como-utilizar)
 
 ## Como ativar
 
