@@ -25,7 +25,7 @@ function bcc_list_init_db ()
     require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
     $charset_collate = $wpdb->get_charset_collate();
-    $table_name = $wpdb->prefix . 'cbs_buttons_clicks_counts';
+    $table_name = $wpdb->prefix . 'cdv_buttons_clicks_counts';
 
     $sql = "SELECT count(*) AS total
         FROM information_schema.tables
@@ -46,7 +46,7 @@ function bcc_get_grouped_rows ()
     require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
     $charset_collate = $wpdb->get_charset_collate();
-    $table_name = $wpdb->prefix . 'cbs_buttons_clicks_counts';
+    $table_name = $wpdb->prefix . 'cdv_buttons_clicks_counts';
 
     $sql = "SELECT *, count(*) AS total
         FROM {$table_name}
@@ -65,7 +65,7 @@ function bcc_find_rows_by_name (string $name)
     require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
     $charset_collate = $wpdb->get_charset_collate();
-    $table_name = $wpdb->prefix . 'cbs_buttons_clicks_counts';
+    $table_name = $wpdb->prefix . 'cdv_buttons_clicks_counts';
 
     $sql = "SELECT base_table.*, (
             SELECT COUNT(*) FROM {$table_name} WHERE name = '{$name}' and id <= base_table.id
@@ -113,10 +113,10 @@ function list_clicks_menu ()
 }
 
 if (defined('WP_CLI') && WP_CLI):
-function cbb_wp_list_all()
+function cdv_wp_list_all()
 {
     global $wpdb;
-    $table = $wpdb->prefix . 'cbs_buttons_clicks_counts';
+    $table = $wpdb->prefix . 'cdv_buttons_clicks_counts';
     $rows = $wpdb->get_results(
         "SELECT id as click_number, created_at, name FROM $table ORDER BY id DESC LIMIT 15"
     );
@@ -142,7 +142,7 @@ function cbb_wp_list_all()
         );
     }
 }
-WP_CLI::add_command('buttons-click list-all', 'cbb_wp_list_all');
+WP_CLI::add_command('buttons-click list-all', 'cdv_wp_list_all');
 endif;
 
 register_activation_hook(__FILE__, 'cbv_init_plugin');

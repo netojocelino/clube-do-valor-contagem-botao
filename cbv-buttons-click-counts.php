@@ -43,7 +43,7 @@ function bcc_init_db ()
     require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
     $charset_collate = $wpdb->get_charset_collate();
-    $table_name = $wpdb->prefix . 'cbs_buttons_clicks_counts';
+    $table_name = $wpdb->prefix . 'cdv_buttons_clicks_counts';
 
     $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -70,7 +70,7 @@ function bcc_insert_row ()
     $name = preg_replace('[^A-Za-z0-9]', '-', data_get($data, 'name', 'sem categoria'));
 
     $wpdb->insert(
-        $wpdb->prefix . 'cbs_buttons_clicks_counts',
+        $wpdb->prefix . 'cdv_buttons_clicks_counts',
         array(
             'name'     => $name,
             'metadata' => json_encode([]),
